@@ -1,0 +1,17 @@
+{
+    "name": "urbananalog/gazette",
+    "description": "CMS for Laravel Spark",
+    "type": "metapackage",
+    "authors": [
+        {
+            "name": "Zach Johnson",
+            "email": "zach@urbananalog.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "UrbanAnalog\\Gazette\\": "src/"
+        }
+    },
+}
