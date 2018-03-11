@@ -1,12 +1,9 @@
 <?php
 
-namespace UrbanAnalog\Gazette\Controllers\Http\Kiosk;
+namespace UrbanAnalog\Gazette\Controllers\Http;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use UrbanAnalog\Gazette\Models\Post;
-use Illuminate\Validation\Rule;
 
 class BlogController extends Controller
 {

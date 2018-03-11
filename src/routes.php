@@ -1,20 +1,22 @@
 <?php
 
 //* Kiosk
-Route::group([
+Route::namespace('\UrbanAnalog\Gazette\Controllers\Http\Kiosk')->group([
     'middleware' => ['web', 'dev']
 ], function () {
     //* Posts
-    Route::resource('gazette/posts', 'UrbanAnalog\Gazette\Controllers\Http\Kiosk\PostsController');
+    Route::resource('gazette/posts', 'PostsController');
 
     //* Media
-    Route::get('gazette/media', 'UrbanAnalog\Gazette\ControllersHttp\Kiosk\MediaController@index')->name('gazette.media');
-    Route::post('gazette/media', 'UrbanAnalog\Gazette\Controllers\Http\Kiosk\UploadController@upload')->name('gazette.upload');
+    Route::get('gazette/media', 'MediaController@index')->name('gazette.media');
+    Route::post('gazette/media', 'UploadController@upload')->name('gazette.upload');
 });
 
-//* Pages
-Route::get(config('gazette.pages.prefix') . '/{slug}', 'UrbanAnalog\Gazette\Controllers\Http\PagesController@view');
+Route::namespace('\UrbanAnalog\Gazette\Controllers\Http')->group(function () {
+    //* Pages
+    Route::get(config('gazette.pages.prefix') . '/{slug}', 'PagesController@view');
 
-//* Blog
-Route::get(config('gazette.posts.archive'), 'UrbanAnalog\Gazette\Controllers\Http\BlogController@index');
-Route::get(config('gazette.posts.prefix') . '/{slug}', 'UrbanAnalog\Gazette\Controllers\Http\BlogController@show');
+    //* Blog
+    Route::get(config('gazette.posts.archive'), 'BlogController@index');
+    Route::get(config('gazette.posts.prefix') . '/{slug}', 'BlogController@show');
+});
