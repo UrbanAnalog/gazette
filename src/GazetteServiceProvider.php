@@ -13,22 +13,30 @@ class GazetteServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
-        $this->loadViewsFrom(__DIR__ . '/views', 'gazette');
+        $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'gazette');
 
         $this->publishes([
-            __DIR__.'/../config/gazette.php' => config_path('gazette.php')
+            __DIR__.'/../install-stubs/config/gazette.php' => config_path('gazette.php')
         ], 'config');
 
-        $this->publishes([
-            __DIR__.'/../database/migrations/' => database_path('migrations')
-        ], 'migrations');
+        if (! class_exists('CreateMediaTable')) {
+            $this->publishes([
+                __DIR__.'/../install-stubs/database/migrations/create_media_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_media_table.php'),
+            ], 'migrations');
+        }
+
+        if (! class_exists('CreatePostsTable')) {
+            $this->publishes([
+                __DIR__.'/../install-stubs/database/migrations/create_posts_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_posts_table.php'),
+            ], 'migrations');
+        }
     }
 
     public function register()
     {
-        $this->app->make('UrbanAnalog\Gazette\Controllers\UploadController');
-        $this->app->make('UrbanAnalog\Gazette\Controllers\MediaController');
-        $this->app->make('UrbanAnalog\Gazette\Controllers\PostsController');
+        $this->app->make('UrbanAnalog\Gazette\Http\Controllers\UploadController');
+        $this->app->make('UrbanAnalog\Gazette\Http\Controllers\MediaController');
+        $this->app->make('UrbanAnalog\Gazette\Http\Controllers\PostsController');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace UrbanAnalog\Gazette\Controllers;
+namespace UrbanAnalog\Gazette\Controllers\Http\Kiosk;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;

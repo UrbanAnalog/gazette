@@ -10,10 +10,12 @@ return [
     | Controlls the settings for pages.
     |
     */
-    'page' => [
+    'pages' => [
         'archive' => 'pages',
         'prefix'  => '',
-        'view'    => 'gazette::types.page'
+        'views'   => [
+            'single' => 'gazette::types.page'
+        ]
     ],
 
     /*
@@ -24,10 +26,14 @@ return [
     | Controlls the settings for posts.
     |
     */
-    'post' => [
-        'archive' => 'posts',
-        'prefix'  => 'posts',
-        'view'    => 'gazette::types.post'
+    'posts' => [
+        'archive'  => 'posts',
+        'prefix'   => 'posts',
+        'views'    => [
+            'archives' => 'gazette::archives.posts',
+            'single'   => 'gazette::post',
+        ],
+        'per_page' => 10
     ],
 
     /*
