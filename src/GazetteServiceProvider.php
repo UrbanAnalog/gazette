@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 
 class GazetteServiceProvider extends ServiceProvider
 {
-    public $version = '0.0.6';
+    public $version = '0.2.0';
 
     public function boot()
     {

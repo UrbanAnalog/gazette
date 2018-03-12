@@ -1,17 +1,47 @@
-1. Add a resolve path to webpack.mix.js
+1. Install the composer package
 
 ```
-path.resolve(__dirname, 'packages/urbananalog/gazette/src/resources/js'),
+composer require urbananalog/gazette
 ```
 
-2. Install the Vuejs Quill NPM packages (wysiwyg editor)
+2. Add the Gazette Servier Provider
+
+Add the following line to the `config/app.php` file's `providers` array:
 
 ```
-npm install vue-quill-editor --save
+UrbanAnalog\Gazette\GazetteServiceProvider::class,
 ```
 
-3. Include the Gazette styles in `/resources/assets/less/app.less`
+3. Install the Vue-TinyMCE and TinyMCE node packages
 
 ```
-@import "./../../../vendor/urbananalog/gazette/src/resources/assets/less/gazette";
+npm install tinymce --save
+```
+
+```
+npm install vue-tinymce --save
+```
+
+4. Add a resolve path to webpack.mix.js
+
+```
+path.resolve(__dirname, 'vendor/urbananalog/gazette/resources/js'),
+```
+
+5. Include the JS bootstrap file
+
+Add the following line to your app's main JS file.
+
+```
+require('gazette');
+```
+
+
+
+Upcoming:
+
+5. Include the Gazette styles in `/resources/assets/less/app.less`
+
+```
+@import "./../../../vendor/urbananalog/gazette/src/resources/assets/sass/gazette";
 ```
