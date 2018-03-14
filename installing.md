@@ -36,7 +36,15 @@ Add the following line to your app's main JS file.
 require('gazette');
 ```
 
-6. Add Kiosk Components
+6. Include the TinyMCE Skin CSS file
+
+Add the following line to your app's main CSS file.
+
+```
+@import "./../../../node_modules/tinymce/skins/lightgray/skin.min.css";
+```
+
+7. Add Kiosk Components
 
 Add the following code to the sidebar in `resources/views/vendor/spark/kiosk.blade.php`
 
@@ -50,7 +58,7 @@ Add the following code to the content area in `resources/views/vendor/spark/kios
 @include('gazette::kiosk.content.panes')
 ```
 
-7. Publish Stubs
+8. Publish Stubs
 
 Run the following command in a command line tool:
 
