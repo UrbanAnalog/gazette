@@ -1,4 +1,4 @@
-// import tinymce from 'tinymce/tinymce';
+import tinymce from 'tinymce/tinymce';
 import 'tinymce/themes/modern/theme';
 import 'tinymce/plugins/directionality/plugin';
 import 'tinymce/plugins/paste/plugin';

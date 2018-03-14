@@ -5,15 +5,15 @@ namespace UrbanAnalog\Gazette\Controllers\Http;
 use App\Http\Controllers\Controller;
 use UrbanAnalog\Gazette\Models\Post;
 
-class PostsController extends Controller
+class PagesController extends Controller
 {
     /**
-     * Get a post's data form a slug.
+     * Get a page's data form a slug.
      *
      * @return Response
      */
-    public function show(Post $post)
+    public function show(Post $page)
     {
-        return view(config('gazette.posts.views.single'), compact('post'));
+        return view(config('gazette.pages.views.single'), compact('page'));
     }
 }

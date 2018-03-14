@@ -36,12 +36,24 @@ Add the following line to your app's main JS file.
 require('gazette');
 ```
 
+6. Add Kiosk Components
 
-
-Upcoming:
-
-5. Include the Gazette styles in `/resources/assets/less/app.less`
+Add the following code to the sidebar in `resources/views/vendor/spark/kiosk.blade.php`
 
 ```
-@import "./../../../vendor/urbananalog/gazette/src/resources/assets/sass/gazette";
+@include('gazette::kiosk.content.menu')
+```
+
+Add the following code to the content area in `resources/views/vendor/spark/kiosk.blade.php`
+
+```
+@include('gazette::kiosk.content.panes')
+```
+
+7. Publish Stubs
+
+Run the following command in a command line tool:
+
+```
+artisan vendor:publish
 ```

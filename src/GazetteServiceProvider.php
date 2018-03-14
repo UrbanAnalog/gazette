@@ -35,8 +35,11 @@ class GazetteServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->make('UrbanAnalog\Gazette\Http\Controllers\UploadController');
-        $this->app->make('UrbanAnalog\Gazette\Http\Controllers\MediaController');
-        $this->app->make('UrbanAnalog\Gazette\Http\Controllers\PostsController');
+        $this->app->make('UrbanAnalog\Gazette\Controllers\Http\Kiosk\UploadController');
+        $this->app->make('UrbanAnalog\Gazette\Controllers\Http\Kiosk\MediaController');
+        $this->app->make('UrbanAnalog\Gazette\Controllers\Http\Kiosk\PostsController');
+        $this->app->make('UrbanAnalog\Gazette\Controllers\Http\PagesController');
+        $this->app->make('UrbanAnalog\Gazette\Controllers\Http\PostsController');
+        $this->app->make('UrbanAnalog\Gazette\Controllers\Http\BlogController');
     }
 }
