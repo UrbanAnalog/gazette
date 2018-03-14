@@ -8,11 +8,11 @@
             </button>
         </div>
 
-        <div class="panel panel-default panel-quill">
-            <div class="panel-heading">
+        <div class="card">
+            <div class="card-header">
                 Content
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div class="form-group" :class="{ 'has-error': errors.title }">
                     <input
                         type="text"
@@ -33,28 +33,32 @@
             </div>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card">
+            <div class="card-header">
                 Search Engine Optimization
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div class="form-group" :class="{ 'has-error': errors.slug }">
                     <label for="slug" class="control-label">URL Slug</label>
                     <div class="input-group">
-                        <span class="input-group-addon">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
                             {{ rtrim(config('app.url'), '/') }}/<span v-if="prefix">@{{ prefix }}/</span>
-                        </span>
+                            </span>
+                        </div>
                         <input
                             type="text"
                             id="slug"
                             class="form-control"
                             v-model="post.slug">
 
-                        <span class="input-group-addon" v-if="post.slug && post.id">
-                            <a :href="'{{ rtrim(config('app.url'), '/') }}/' + fullUrl" target="_blank">
-                                <i class="fa fa-external-link"></i>
-                            </a>
-                        </span>
+                        <div class="input-group-append" v-if="post.slug && post.id">
+                            <span class="input-group-text">
+                                <a :href="'{{ rtrim(config('app.url'), '/') }}/' + fullUrl" target="_blank">
+                                    <i class="fa fa-external-link"></i>
+                                </a>
+                            </span>
+                        </div>
                     </div>
                     <p class="help-block" v-for="error in errors.slug">
                         @{{ error }}

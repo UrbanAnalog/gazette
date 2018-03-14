@@ -12,8 +12,10 @@ class PostsController extends Controller
      *
      * @return Response
      */
-    public function show(Post $post)
+    public function show($slug)
     {
+        $post = Post::where('slug', $slug)->where('type', 'post')->firstOrFail();
+
         return view(config('gazette.posts.views.single'), compact('post'));
     }
 }

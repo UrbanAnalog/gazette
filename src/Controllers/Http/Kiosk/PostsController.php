@@ -63,7 +63,7 @@ class PostsController extends Controller
             $request->slug = str_slug($request->slug);
         }
 
-        Validator::make($request->all(),  [
+        \Validator::make($request->all(),  [
             'title' => 'bail|required',
             'slug' => 'unique:posts'
         ])->validate();

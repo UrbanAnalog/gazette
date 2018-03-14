@@ -12,8 +12,10 @@ class PagesController extends Controller
      *
      * @return Response
      */
-    public function show(Post $page)
+    public function show($slug)
     {
+        $page = Post::where('slug', $slug)->where('type', 'page')->firstOrFail();
+
         return view(config('gazette.pages.views.single'), compact('page'));
     }
 }
