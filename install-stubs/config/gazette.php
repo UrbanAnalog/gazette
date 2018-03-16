@@ -12,7 +12,7 @@ return [
     */
     'pages' => [
         'archive' => 'pages',
-        'prefix'  => '',
+        'prefix'  => 'pages',
         'views'   => [
             'single' => 'gazette::types.page'
         ]
