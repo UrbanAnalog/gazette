@@ -1,7 +1,6 @@
 {
   "name": "urbananalog/gazette",
   "description": "CMS for Laravel Spark",
-  "version": "dev-spark6",
   "authors": [
     {
       "name": "Zach Johnson",
