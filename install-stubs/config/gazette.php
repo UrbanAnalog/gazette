@@ -30,8 +30,8 @@ return [
         'archive'  => 'posts',
         'prefix'   => 'posts',
         'views'    => [
-            'archive' => 'gazette::archives.posts',
-            'single'  => 'gazette::post',
+            'archives' => 'gazette::archives.posts',
+            'single'   => 'gazette::post',
         ],
         'per_page' => 10
     ],

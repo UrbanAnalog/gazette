@@ -4,7 +4,7 @@
  * @see http://sneak.co.nz/projects/img-resizing/
  */
 
-namespace UrbanAnalog\Gazette\Controllers\Http\Kiosk;
+namespace UrbanAnalog\Gazette\Http\Controllers\Kiosk;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;

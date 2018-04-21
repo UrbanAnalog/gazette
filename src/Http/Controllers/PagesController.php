@@ -1,6 +1,6 @@
 <?php
 
-namespace UrbanAnalog\Gazette\Controllers\Http;
+namespace UrbanAnalog\Gazette\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use UrbanAnalog\Gazette\Models\Post;
