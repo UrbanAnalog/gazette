@@ -8,6 +8,8 @@ Vue.component('media-browser', {
 
     mounted() {
         this.loadPage(this.page);
+
+        Bus.$on('uploaded-to-media-browser', this.uploadComplete);
     },
 
     methods: {
@@ -25,18 +27,9 @@ Vue.component('media-browser', {
             });
         },
 
-        uploadMedia(e) {
-            var data = new FormData();
-            data.append('asset', $('input[name=asset]')[0].files[0]);
-
-            axios.post('/gazette/media', data)
-                .then(response => {
-                    console.log(response.data);
-                    this.media.splice(0, 0, response.data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+        uploadComplete(response) {
+            console.log(response);
+            this.media.splice(0, 0, response.data);
         },
 
         searchMedia() {

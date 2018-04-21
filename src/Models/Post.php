@@ -18,6 +18,10 @@ class Post extends Model
         'user_id'
     ];
 
+    protected $appends = [
+        'path'
+    ];
+
     /**
      * Get the route key for the model.
      *
@@ -26,5 +30,42 @@ class Post extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getPathAttribute()
+    {
+        return $this->path();
+    }
+
+    public function path()
+    {
+        $type = str_plural($this->type);
+
+        return url(config("gazette.{$type}.prefix") . '/' . $this->slug);
+    }
+
+    public function excerpt()
+    {
+        return ! empty($this->meta_description)
+            ? $this->meta_description
+            : str_limit(strip_tags($this->content), 255, '...');
+    }
+
+    public function featured_image()
+    {
+        return $this->belongsTo('\UrbanAnalog\Gazette\Models\Media', 'media_id');
+    }
+
+    public function thumbnail()
+    {
+        $width = config('gazette.posts.featured_image.width');
+        $height = config('gazette.posts.featured_image.height');
+
+        return $this->cropped($width, $height);
+    }
+
+    public function cropped($width = 300, $height = 200)
+    {
+        return \Croppa::url($this->featured_image->filename, $width, $height);
     }
 }

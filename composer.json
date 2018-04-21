@@ -7,7 +7,9 @@
       "email": "hello@zachjohnson.name"
     }
   ],
-  "require": {},
+  "require": {
+    "bkwld/croppa": "^4.7"
+  },
   "autoload": {
     "psr-4": {
       "UrbanAnalog\\Gazette\\": "src/"

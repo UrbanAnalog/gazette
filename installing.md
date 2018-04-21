@@ -12,7 +12,7 @@ Add the following line to the `config/app.php` file's `providers` array:
 UrbanAnalog\Gazette\GazetteServiceProvider::class,
 ```
 
-##3. Install the Vue-TinyMCE and TinyMCE node packages
+##3. Install the required Node packages
 
 ```
 npm install tinymce --save

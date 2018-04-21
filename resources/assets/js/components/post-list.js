@@ -20,9 +20,14 @@ Vue.component('post-list', {
                 this.loadPost({ id: parameters[0] });
             } else {
                 this.showPosts();
+                this.editingPost = false;
             }
 
             return true;
+        });
+
+        Bus.$on('cancelPostEdit', () => {
+            this.editingPost = false
         });
     },
 

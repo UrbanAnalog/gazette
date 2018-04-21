@@ -14,7 +14,7 @@ return [
         'archive' => 'pages',
         'prefix'  => 'pages',
         'views'   => [
-            'single' => 'gazette::types.page'
+            'single' => 'gazette::pages.single'
         ]
     ],
 
@@ -30,10 +30,15 @@ return [
         'archive'  => 'posts',
         'prefix'   => 'posts',
         'views'    => [
-            'archives' => 'gazette::archives.posts',
-            'single'   => 'gazette::post',
+            'card'    => 'gazette::posts.card',
+            'archive' => 'gazette::posts.archive',
+            'single'  => 'gazette::posts.single',
         ],
-        'per_page' => 10
+        'per_page'       => 10,
+        'featured_image' => [
+            'width'  => 600,
+            'height' => 400
+        ]
     ],
 
     /*

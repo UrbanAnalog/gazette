@@ -31,11 +31,36 @@ Vue.component('post-editor', {
         this.loading = true;
 
         this.$parent.$on('showPost', (post) => {
+            this.loading = true;
             this.getPost(post);
         });
+
+		Bus.$on('uploaded-featured-image', this.uploadComplete);
+
+		// stickybits('#post-actions', {verticalPosition: 'bottom'});
     },
 
     methods: {
+        cancel() {
+            Bus.$emit('cancelPostEdit');
+        },
+
+        uploadComplete(response) {
+			console.log(response);
+            if (this.post === null) {
+				console.log('bad');
+                return;
+            }
+
+            this.post.media_id = response.data.id;
+            this.post.featured_image = response.data;
+        },
+
+        removeMedia() {
+            this.post.media_id = null;
+            this.post.featured_image = null;
+        },
+
         imageHandler(asset, success, failure) {
             var formData = new FormData();
             formData.append("asset", asset.blob(), asset.filename());
@@ -60,8 +85,12 @@ Vue.component('post-editor', {
                     'title': null,
                     'content': null,
                     'type': this.type,
-                    'slug': null
+                    'slug': null,
+                    'media_id': null,
+                    'featured_image': null
                 };
+
+                this.content = '';
 
                 this.loading = false;
             } else {
@@ -84,6 +113,7 @@ Vue.component('post-editor', {
                     .then(response => {
                         this.post = response.data;
                         history.pushState(null, null, `#/${this.type}s/${this.post.id}`);
+                        alert('Post was saved');
                     }).catch(error => {
                         this.showErrors(error.response.data);
                     });
@@ -91,13 +121,15 @@ Vue.component('post-editor', {
                 axios.put(`/gazette/posts/${this.post.id}`, this.post)
                     .then(response => {
                         this.post = response.data;
+                        alert('Post was saved');
                     }).catch(error => {
-                        this.showErrors(error.response.data);
+                        this.showErrors(error.response.data.errors);
                     });
             }
         },
 
         showErrors(errors) {
+            console.log(errors);
             this.errors = errors;
             alert('There were some errors when saving.');
         }

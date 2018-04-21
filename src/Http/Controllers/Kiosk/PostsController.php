@@ -31,7 +31,7 @@ class PostsController extends Controller
     {
         $column = is_numeric($slug) ? 'id' : 'slug';
 
-        return Post::where($column, $slug)->firstOrFail();
+        return Post::where($column, $slug)->with('featured_image')->firstOrFail();
     }
 
     /**
@@ -70,11 +70,12 @@ class PostsController extends Controller
 
         $post = new Post;
 
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->content = $request->content;
-        $post->type = $request->type;
-        $post->user_id = $request->user()->id;
+        $post->title    = $request->title;
+        $post->slug     = $request->slug;
+        $post->content  = $request->content;
+        $post->type     = $request->type;
+        $post->user_id  = $request->user()->id;
+        $post->media_id = $request->media_id;
 
         $post->save();
 
@@ -101,14 +102,15 @@ class PostsController extends Controller
             'slug' => Rule::unique('posts')->ignore($id)
         ]);
 
-        $post = Post::find($id);
+        $post = Post::find($id)->with('featured_image');
 
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->content = $request->content ?: null;
-        $post->meta_title = $request->meta_title ?: null;
+        $post->title            = $request->title;
+        $post->slug             = $request->slug;
+        $post->content          = $request->content ?: null;
+        $post->meta_title       = $request->meta_title ?: null;
         $post->meta_description = $request->meta_description ?: null;
-        $post->robots = $request->robots ?: null;
+        $post->robots           = $request->robots ?: null;
+        $post->media_id         = $request->media_id ?: null;
 
         $post->save();
 

@@ -14,6 +14,7 @@ import 'tinymce/plugins/hr/plugin';
 import VueTinymce from 'vue-tinymce';
 Vue.use(VueTinymce);
 
+Vue.component('media-uploader', require('./components/media-uploader'));
 require('./components/media-browser');
 require('./components/post-list');
 require('./components/post-editor');
