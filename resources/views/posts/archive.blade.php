@@ -2,14 +2,11 @@
 
 @section('content')
 <div class="container py-2">
-    <div class="columns-2">
+    <div class="row">
         @foreach ($posts as $post)
-        <h2>
-            <a href="{{ $post->path() }}">
-                {{ $post->title }}
-            </a>
-        </h2>
-        <p>Posted on {{ $post->created_at }}</p>
+        <div class="col-4">
+            @include('gazette::posts.card')
+        </div>
         @endforeach
     </div>
 </div>
