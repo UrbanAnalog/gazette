@@ -56,16 +56,19 @@ class Post extends Model
         return $this->belongsTo('\UrbanAnalog\Gazette\Models\Media', 'media_id');
     }
 
+    public function has_thumbnail() {
+        return isset($this->featured_image->filename);
+    }
+
     public function thumbnail()
     {
+        if (! $this->has_thumbnail()) {
+            return config('gazette.posts.featured_image.default');
+        }
+
         $width = config('gazette.posts.featured_image.width');
         $height = config('gazette.posts.featured_image.height');
 
-        return $this->cropped($width, $height);
-    }
-
-    public function cropped($width = 300, $height = 200)
-    {
         return \Croppa::url($this->featured_image->filename, $width, $height);
     }
 }

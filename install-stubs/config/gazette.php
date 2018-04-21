@@ -37,7 +37,8 @@ return [
         'per_page'       => 10,
         'featured_image' => [
             'width'  => 600,
-            'height' => 400
+            'height' => 400,
+            'default' => '//placehold.it/600x400'
         ]
     ],
 

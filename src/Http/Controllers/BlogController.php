@@ -16,6 +16,7 @@ class BlogController extends Controller
     {
         $posts = Post::where('type', 'post')
             ->latest()
+            ->with('featured_image')
             ->paginate(config('gazette.posts.per_page'));
 
         return view(config('gazette.posts.views.archive'), compact('posts'));
