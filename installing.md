@@ -72,6 +72,10 @@ Run the following command in a command line tool:
 php artisan vendor:publish
 ```
 
+```
+php artisan vendor:publish --tag=croppa
+```
+
 ##9. Migrate the Database
 
 Run the following command to update the database:
@@ -84,3 +88,22 @@ php run migrate
 ##10. Compile Assets
 
 Run one of the `npm run (watch|dev|production)` commands to compile your assets.
+
+
+##11. Change Croppa config
+
+Adjust the `config/croppa.php` file to match the below:
+
+```php
+'src_dir' => storage_path('app/public'),
+'crops_dir' => storage_path('app/public'),
+'path' => '(.*)$',
+```
+
+##12. Reset the Route Cache
+
+Run:
+
+```
+php artisan route:cache
+```
