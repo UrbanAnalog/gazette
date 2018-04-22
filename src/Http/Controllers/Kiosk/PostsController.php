@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use UrbanAnalog\Gazette\Models\Post;
+use UrbanAnalog\Gazette\Models\Media;
 use Illuminate\Validation\Rule;
 
 class PostsController extends Controller
@@ -102,7 +103,7 @@ class PostsController extends Controller
             'slug' => Rule::unique('posts')->ignore($id)
         ]);
 
-        $post = Post::find($id)->with('featured_image');
+        $post = Post::with('featured_image')->find($id);
 
         $post->title            = $request->title;
         $post->slug             = $request->slug;
@@ -110,7 +111,11 @@ class PostsController extends Controller
         $post->meta_title       = $request->meta_title ?: null;
         $post->meta_description = $request->meta_description ?: null;
         $post->robots           = $request->robots ?: null;
-        $post->media_id         = $request->media_id ?: null;
+
+        if (isset($request->media_id)) {
+            $media = Media::find($request->media_id);
+            $post->featured_image()->associate($media);
+        }
 
         $post->save();
 
