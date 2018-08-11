@@ -37,7 +37,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <div v-if="post.featured_image">
-                                <img :src="'/' + post.featured_image.filename" width="200">
+                                <img :src="'/storage/' + post.featured_image.filename" width="200">
                                 <a href="#" @click.prevent="removeMedia" class="text-danger">Remove</a>
                             </div>
                             <div v-else>
