@@ -5,7 +5,7 @@
     <div class="row">
         @foreach ($posts as $post)
         <div class="col-12 col-sm-6 col-md-4">
-            @include('gazette::posts.card')
+            @include(config('gazette.posts.views.card'))
         </div>
         @endforeach
     </div>
