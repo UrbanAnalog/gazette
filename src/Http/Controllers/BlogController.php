@@ -32,11 +32,13 @@ class BlogController extends Controller
         $next = Post::query()
             ->where('id', '>', $post->id)
             ->where('type', 'post')
+            ->oldest()
             ->first();
 
         $previous = Post::query()
             ->where('id', '<', $post->id)
             ->where('type', 'post')
+            ->latest()
             ->first();
 
         return view(config('gazette.posts.views.single'), compact(['post', 'next', 'previous']));
