@@ -1,8 +1,9 @@
 <template>
     <form @submit.prevent="uploadMedia" class="form-inline" enctype="multipart/form-data">
         <input type="file" name="asset" class="form-control" multiple>
-        <button type="submit" class="btn btn-primary">
-            Upload
+        <button type="submit" class="btn btn-primary" :disabled="uploading">
+            <span v-if="uploading">Uploading</span>
+			<span v-else>Upload</span>
         </button>
 
 		<div v-if="errors" class="alert alert-danger my-4">
@@ -31,22 +32,27 @@
 
 		data() {
 			return {
-				errors: null
+				errors   : null,
+				uploading: false,
 			}
 		},
 
         methods: {
             uploadMedia(e) {
-                var data = new FormData();
+				var data = new FormData();
 				data.append('asset', $(e.target).find('input[name=asset]')[0].files[0]);
-				this.errors = null;
+
+				this.errors  = null;
+				this.loading = true;
 
                 axios.post('/gazette/media', data)
                     .then(response => {
 						Bus.$emit('uploaded-to-media-browser', response);
 						e.target.reset();
+						this.loading = false;
                     }, error => {
 						this.errors = error.response.data.errors.asset;
+						this.loading = false;
                     });
             },
         }
