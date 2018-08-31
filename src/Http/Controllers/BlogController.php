@@ -29,6 +29,16 @@ class BlogController extends Controller
      */
     public function show(Post $post)
     {
-        return view(config('gazette.posts.views.single'), compact('post'));
+        $next = Post::query()
+            ->where('id', '>', $post->id)
+            ->where('type', 'post')
+            ->first();
+
+        $previous = Post::query()
+            ->where('id', '<', $post->id)
+            ->where('type', 'post')
+            ->first();
+
+        return view(config('gazette.posts.views.single'), compact(['post', 'next', 'previous']));
     }
 }
