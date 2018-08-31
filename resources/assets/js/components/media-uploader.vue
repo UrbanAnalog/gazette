@@ -43,16 +43,16 @@
 				data.append('asset', $(e.target).find('input[name=asset]')[0].files[0]);
 
 				this.errors  = null;
-				this.loading = true;
+				this.uploading = true;
 
                 axios.post('/gazette/media', data)
                     .then(response => {
 						Bus.$emit('uploaded-to-media-browser', response);
 						e.target.reset();
-						this.loading = false;
+						this.uploading = false;
                     }, error => {
 						this.errors = error.response.data.errors.asset;
-						this.loading = false;
+						this.uploading = false;
                     });
             },
         }
