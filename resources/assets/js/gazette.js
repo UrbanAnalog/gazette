@@ -19,6 +19,10 @@ require('./components/media-browser');
 require('./components/post-list');
 require('./components/post-editor');
 
-Vue.filter('asset_url', function (filename) {
+Vue.filter('asset_url', function (filename, ignorePdf) {
+	if (filename.indexOf('.pdf') > -1 && ignorePdf !== true) {
+		return '//placehold.it/300x300?text=PDF';
+	}
+
     return `//${window.location.host}/storage/${filename}`
 });

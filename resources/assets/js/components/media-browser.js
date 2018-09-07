@@ -34,6 +34,15 @@ Vue.component('media-browser', {
 
         searchMedia() {
             return;
-        }
+		},
+
+		copyUrl(file) {
+			const el = document.createElement('textarea');
+			el.value = this.$options.filters.asset_url(file.filename, true);
+			document.body.appendChild(el);
+			el.select();
+			document.execCommand('copy');
+			document.body.removeChild(el);
+		}
     }
 });

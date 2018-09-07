@@ -14,9 +14,11 @@ Vue.component('post-editor', {
                 plugins: [
                     'advlist link image hr media table directionality paste imagetools autoresize code',
                 ],
-                toolbar1: 'styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | hr table link media image',
+				toolbar1: 'styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | hr table link media image',
+				file_picker_types: 'file image media',
                 images_upload_url: '/gazette/media',
-                images_upload_handler: this.imageHandler
+				images_upload_handler: this.imageHandler,
+				convert_urls: false
             }
         }
     },

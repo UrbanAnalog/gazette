@@ -12,7 +12,7 @@ class UploadController extends Controller
     public function upload(Request $request)
     {
         $this->validate($request, [
-            'asset' => 'required|image|mimes:' . config('gazette.media.types') . '|max:' . config('gazette.media.max_size') . '',
+            'asset' => 'required|mimes:' . config('gazette.media.types') . '|max:' . config('gazette.media.max_size') . '',
         ]);
 
         $file = $request->file('asset');
