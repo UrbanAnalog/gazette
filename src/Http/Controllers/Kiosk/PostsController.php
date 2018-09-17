@@ -71,12 +71,13 @@ class PostsController extends Controller
 
         $post = new Post;
 
-        $post->title    = $request->title;
-        $post->slug     = $request->slug;
-        $post->content  = $request->content;
-        $post->type     = $request->type;
-        $post->user_id  = $request->user()->id;
-        $post->media_id = $request->media_id;
+        $post->title          = $request->title;
+        $post->slug           = $request->slug;
+        $post->content        = $request->content;
+        $post->type           = $request->type;
+        $post->user_id        = $request->user()->id;
+        $post->media_id       = $request->media_id;
+        $post->featured_photo = $request->featured_photo;
 
         $post->save();
 
@@ -111,6 +112,8 @@ class PostsController extends Controller
         $post->meta_title       = $request->meta_title ?: null;
         $post->meta_description = $request->meta_description ?: null;
         $post->robots           = $request->robots ?: null;
+        $post->featured_photo   = $request->featured_photo ?: null;
+        $post->password         = $request->password ?: null;
 
         if (isset($request->media_id)) {
             $media = Media::find($request->media_id);

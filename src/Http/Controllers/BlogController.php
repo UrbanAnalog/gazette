@@ -2,6 +2,7 @@
 
 namespace UrbanAnalog\Gazette\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use UrbanAnalog\Gazette\Models\Post;
 
@@ -27,7 +28,7 @@ class BlogController extends Controller
      *
      * @return Response
      */
-    public function show(Post $post)
+    public function show(Request $request, Post $post)
     {
         $next = Post::query()
             ->where('id', '>', $post->id)
@@ -40,6 +41,18 @@ class BlogController extends Controller
             ->where('type', 'post')
             ->latest()
             ->first();
+
+        if (!isset($request->password) && $post->password && !$request->session()->get("post-pw-{$post->id}")) {
+            return view('gazette::password');
+        }
+
+        if (!$request->session()->get("post-pw-{$post->id}") && isset($request->password) && !password_verify($request->password, $post->password)) {
+            $error = 'Password incorrect';
+
+            return view('gazette::password', compact('error'));
+        }
+
+        $request->session()->put("post-pw-{$post->id}", true);
 
         return view(config('gazette.posts.views.single'), compact(['post', 'next', 'previous']));
     }

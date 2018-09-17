@@ -15,7 +15,8 @@ class Post extends Model
         'meta_description',
         'robots',
         'media_id',
-        'user_id'
+        'user_id',
+        'password',
     ];
 
     protected $appends = [

@@ -17,9 +17,11 @@ Route::namespace('\UrbanAnalog\Gazette\Http\Controllers')
     ->middleware(['web', 'bindings'])
     ->group(function () {
         //* Pages
+        Route::post(config('gazette.pages.prefix') . '/{slug}', 'PagesController@show');
         Route::get(config('gazette.pages.prefix') . '/{slug}', 'PagesController@show');
 
         //* Blog
         Route::get(config('gazette.posts.archive'), 'BlogController@index');
+        Route::post(config('gazette.posts.prefix') . '/{post}', 'BlogController@show');
         Route::get(config('gazette.posts.prefix') . '/{post}', 'BlogController@show');
     });
