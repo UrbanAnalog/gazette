@@ -21,9 +21,7 @@ class PostsController extends Controller
     {
         $post = Post::where('slug', $slug)->where('type', 'post')->firstOrFail();
 
-        dd($post->password);
-
-        if (!$request->password && $post->password && !$request->session()->get("post-pw-{$post->id}")) {
+        if (!$request->password && $post->password_protected && $post->password && !$request->session()->get("post-pw-{$post->id}")) {
             return view('gazette::password');
         }
 
