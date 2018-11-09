@@ -42,11 +42,11 @@ class BlogController extends Controller
             ->latest()
             ->first();
 
-        if (!isset($request->password) && $post->password && !$request->session()->get("post-pw-{$post->id}")) {
+        if (!$request->password && $post->password_protected && $post->password && !$request->session()->get("post-pw-{$post->id}")) {
             return view('gazette::password');
         }
 
-        if (!$request->session()->get("post-pw-{$post->id}") && isset($request->password) && !password_verify($request->password, $post->password)) {
+        if ($request->password && $request->password != $post->password && !$request->session()->get("post-pw-{$post->id}")) {
             $error = 'Password incorrect';
 
             return view('gazette::password', compact('error'));
